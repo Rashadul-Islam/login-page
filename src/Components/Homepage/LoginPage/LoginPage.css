@@ -1,0 +1,126 @@
+.heading {
+    margin-top: 5%;
+    font-weight: 500;
+    font-size: 18px;
+    text-decoration: none;
+    color: cadetblue;
+    display: inline-block;
+    position: relative;
+}
+
+.login {
+    border: 1px solid cadetblue;
+    width: 50%;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.underline:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 12px;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.underline:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.social-login {
+    font-size: 18px;
+    color: white;
+    width: 100%;
+}
+
+.social-login:hover {
+    color: white;
+}
+
+.ul-style {
+    padding-left: 0;
+}
+
+.ul-style li {
+    list-style: none;
+    padding-bottom: 15px;
+}
+
+.link-style {
+    text-decoration: none;
+}
+
+.form-width {
+    width: 45%;
+    margin-left: 10px;
+}
+
+.btn_style {
+    bottom: 0;
+    width: 45%;
+    border-radius: 10px;
+    float: right;
+    margin-top: 60px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.line {
+    width: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.line-style {
+    margin-left: 10px;
+}
+
+.card-text {
+    color: cadetblue;
+    font-weight: 400;
+}
+
+.email input[type="email"] {
+    padding-left: 35px;
+}
+
+.email {
+    position: relative;
+}
+
+.email .i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.password input[type="password"] {
+    padding-left: 35px;
+}
+
+.password {
+    position: relative;
+}
+
+.password .i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #aaa;
+    transition: 0.3s;
+}
+.form-check-label{
+    padding-right: 18px;
+}

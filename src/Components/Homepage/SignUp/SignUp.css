@@ -1,0 +1,74 @@
+.signup {
+    border: 1px solid cadetblue;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.sign_form {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.text input[type="text"] {
+    padding-left: 35px;
+}
+
+.text {
+    position: relative;
+}
+
+.text .i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.phone input[type="tel"] {
+    padding-left: 35px;
+}
+
+.phone {
+    position: relative;
+}
+
+.phone .i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+small {
+    font-size: 1.4ch;
+    font-weight: 500;
+    color: cadetblue;
+}
+
+small span {
+    color: blue;
+}
+
+.Sign_button {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    width: 40%;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-left: 60%;
+}
+
+.font_style {
+    font-weight: 500;
+    color: cadetblue;
+}

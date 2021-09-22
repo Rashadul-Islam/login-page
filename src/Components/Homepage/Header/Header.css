@@ -1,0 +1,48 @@
+.logo {
+    width: 5%;
+}
+
+.bottom_border {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    background-color: lightcyan;
+    border-bottom: 1px solid blue;
+}
+
+nav li {
+    margin-right: 40px;
+    list-style: none;
+    text-decoration: none;
+    display: inline;
+}
+
+li a {
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.effect:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.effect:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.button_style {
+    display: block;
+    border-radius: 15px;
+}
