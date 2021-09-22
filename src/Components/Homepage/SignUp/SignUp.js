@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import "./SignUp.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faMobile, faUser } from '@fortawesome/free-solid-svg-icons';
+import { secure } from './bcrypt';
 
 const SignUp = () => {
 
@@ -16,29 +17,101 @@ const SignUp = () => {
         pass: ""
     })
 
+    const [mobile, setMobile] = useState("");
+    const [email, setEmail] = useState("");
+
     const handleBlur = (event) => {
         const newUser = { ...regUser };
         newUser[event.target.name] = event.target.value;
         setRegUser(newUser);
     }
-    
+
+    useEffect(() => {
+        if (regUser.phone !== '') {
+            fetch(`https://damp-dawn-23760.herokuapp.com/user/${regUser.phone}`)
+                .then(res => res.json())
+                .then(data => setMobile(data.phone))
+                .catch(err => setMobile(""))
+        }
+
+    }, [regUser.phone])
+
+    useEffect(() => {
+        if (regUser.email !== '') {
+            fetch(`https://damp-dawn-23760.herokuapp.com/users/${regUser.email}`)
+                .then(res => res.json())
+                .then(data => setEmail(data.email))
+                .catch(err => setEmail(""))
+        }
+
+    }, [regUser.email])
+
+    const mobileValidate = () => {
+        const mobileNumber = regUser.phone;
+        const check = mobileNumber.length >= 11 ? mobileNumber.substring(mobileNumber.length - 11) : mobileNumber;
+        const dataPhone = mobile.length >= 11 ? mobile.substring(mobile.length - 11) : mobile;
+        const reg = /(^(\+8801|01))[1|3-9]{1}(\d){8}$/;
+        if (reg.test(mobileNumber)) {
+            if (check === dataPhone) {
+                alert("This Number Already Taken!!!");
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            alert("please correct your mobile number!!!");
+        }
+    }
+
+    const emailCheck = () => {
+        if (email === regUser.email) {
+            alert("email already taken!!!");
+        }
+        else {
+            return true;
+        }
+    }
+
+    const passwordValid = () => {
+        const password = regUser.pass;
+        const reg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        if (password.length < 6 || password.length > 16) {
+            alert('password length must greater than 6 and less than 16');
+        }
+        else {
+            if (reg.test(password)) {
+                return true;
+            }
+            else {
+                alert("password must contain atleast one number and one special character");
+            }
+        }
+
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newUser = { ...regUser };
-        const url = "https://damp-dawn-23760.herokuapp.com/signup"
-        fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        })
-            .then(res => res.json())
-            .then(data => {
-                    alert('Registration Complete!!!');
-                    document.getElementById("myForm").reset();
+        if (mobileValidate() && emailCheck() && passwordValid()) {
+            const newUser = { ...regUser };
+            const getHash = (secure(newUser.pass));
+            getHash.then(function (result) {
+                const data = { ...regUser }
+                data.pass = result;
+                const url = "https://damp-dawn-23760.herokuapp.com/signup"
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert('Registration Complete!!!');
+                        document.getElementById("myForm").reset();
+                    })
             })
-
+        }
     }
     return (
         <div>

@@ -6,6 +6,7 @@ import { faGooglePlusG, faFacebookF, faLinkedinIn } from '@fortawesome/free-bran
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import "./LoginPage.css";
 import { fbSIgnIn, googleSIgnIn } from './firebase.config';
+import { passMatch } from '../SignUp/bcrypt';
 
 const LoginPage = () => {
     const [login, setLogin] = useState({
@@ -33,14 +34,18 @@ const LoginPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (loginInfo !== null) {
-            if (login.email === loginInfo.email && login.pass === loginInfo.pass) {
-                alert("success!!!!");
-                document.getElementById("myForm").reset();
-            }
-            else {
-                alert("Please check your email and password!!!")
-            }
+        if (loginInfo !== null && login.email === loginInfo.email) {
+
+            const match = passMatch(login.pass, loginInfo.pass);
+            match.then(function (result) {
+                if (result) {
+                    alert("success!!!");
+                    document.getElementById("myForm").reset();
+                }
+                else {
+                    alert("Invalid Credential!!");
+                }
+            })
         }
         else {
             alert("Invalid Credential!!!");
